@@ -8,7 +8,6 @@ public class MyCustomMDCFactory implements UnitOfWorkFactory{
 
 	@Override
 	public UnitOfWork createUnitOfWork(Exchange exchange) {
-		System.out.println(exchange);
 		return new MyCustomMDC(exchange);
 	}
 
