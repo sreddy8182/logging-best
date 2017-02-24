@@ -1,3 +1,7 @@
+#with format defined as 
+#log4j.appender.integrationProcess.appender.layout.ConversionPattern=%d{ABSOLUTE} | %-5.5p | %X{camel.contextId} | %X{camel.routeId} | %X{camel.exchangeId} | %X{appId} | %m%n
+
+Log Data
 23:40:14,359 | INFO  | myloggingdemo | mysecondRoute | ID-smunirat-local-55939-1487903694010-21-4 | mylogbestpracticeapp | start of my second route
 23:40:14,359 | INFO  | myloggingdemo | mysecondRoute | ID-smunirat-local-55939-1487903694010-21-4 | mylogbestpracticeapp | Set the body of Exchange to [Ljava.lang.String;@26a2d7c
 23:40:14,359 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-21-7 | mylogbestpracticeapp | start of my third route
