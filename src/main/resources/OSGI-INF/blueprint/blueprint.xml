@@ -21,6 +21,7 @@
 			<ref component-id="loggingOutInterceptor" />
 		</cxf:outFaultInterceptors>
 	</cxf:bus>
+	<!-- Wiring up the custom MDC factory Camel will automatically pick this bean up-->
 	<bean class="logging.best.processor.mdc.MyCustomMDCFactory" id="unitOfWorkFactory" />
 
 	<bean class="logging.best.processor.LoggingProcessor" id="normalBean" />
@@ -38,8 +39,8 @@
 		</onException>
 		<route id="myfirstroute">
 			<from id="myfirstroutetimer" uri="timer:elavon?period=60000&amp;repeatCount=1" />
-			<setHeader headerName="specialId"><constant>mylogbestpracticeapp</constant></setHeader>
-			<setProperty propertyName="specialId">
+			<setHeader headerName="appId"><constant>mylogbestpracticeapp</constant></setHeader>
+			<setProperty propertyName="appId">
 				<constant>mylogbestpracticeapp</constant>
 			</setProperty>
 			<to uri="log:logging.best.processor?showAll=true&amp;level=INFO" />
