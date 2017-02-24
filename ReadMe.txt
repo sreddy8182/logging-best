@@ -1,4 +1,6 @@
-This project is a demo 
+This project is intended as  demo for MDC logging in fuse for per context logging and also per application logging , which can span across
+multiple contexts and bundles.
+
 1. For configuring MDC logging in fuse
 2. To enable creating one file per context
 3. To log multiple categories of relavant info to the context file
