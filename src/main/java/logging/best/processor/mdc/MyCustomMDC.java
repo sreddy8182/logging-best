@@ -16,9 +16,7 @@ public class MyCustomMDC extends MDCUnitOfWork implements UnitOfWork {
 	public MyCustomMDC(Exchange exchange) {
 		super(exchange);
 		this.mySpeciaId = MDC.get(MDC_SPL_ID);
-		String specialId=exchange.getIn().getHeader(MDC_SPL_ID, String.class);
-		if(specialId!=null)
-		MDC.put(MDC_SPL_ID, specialId);//exchange.getProperty(MDC_SPL_ID, String.class)!=null?exchange.getProperty(MDC_SPL_ID, String.class):"NoId");
+		MDC.put(MDC_SPL_ID, exchange.getProperty(MDC_SPL_ID, String.class)!=null?exchange.getProperty(MDC_SPL_ID, String.class):"NoId");
 	}
 
 	@Override
