@@ -10,7 +10,7 @@ import org.slf4j.MDC;
 
 public class MyCustomMDC extends MDCUnitOfWork implements UnitOfWork {
 
-	public static final String MDC_SPL_ID = "specialId";
+	public static final String MDC_SPL_ID = "appId";
 	private final String mySpeciaId;
 
 	public MyCustomMDC(Exchange exchange) {
