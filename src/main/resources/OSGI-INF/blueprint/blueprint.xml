@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:camel-cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xmlns:cxf="http://cxf.apache.org/blueprint/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<camel-cxf:cxfEndpoint
+		address="http://www.webservicex.net/stockquote.asmx?WSDL" id="getQuote"
+		serviceClass="com.weather.StockQuoteSoapImpl" />
+	<bean class="org.apache.cxf.interceptor.LoggingInInterceptor" id="loggingInInterceptor" />
+	<bean class="org.apache.cxf.interceptor.LoggingOutInterceptor" id="loggingOutInterceptor" />
+	<cxf:bus>
+		<cxf:inFaultInterceptors>
+			<ref component-id="loggingInInterceptor" />
+		</cxf:inFaultInterceptors>
+		<cxf:outInterceptors>
+			<ref component-id="loggingOutInterceptor" />
+		</cxf:outInterceptors>
+		<cxf:inInterceptors>
+			<ref component-id="loggingInInterceptor" />
+		</cxf:inInterceptors>
+		<cxf:outFaultInterceptors>
+			<ref component-id="loggingOutInterceptor" />
+		</cxf:outFaultInterceptors>
+	</cxf:bus>
+	<bean class="logging.best.processor.mdc.MyCustomMDCFactory" id="unitOfWorkFactory" />
+
+	<bean class="logging.best.processor.LoggingProcessor" id="normalBean" />
+	<bean class="logging.best.processor.LoggingCamelProcessor" id="camelBean" />
+	<bean class="logging.best.processor.aggregate.AggregateBody" id="myStrategy" />
+	<bean class="logging.best.processor.aggregate.SetBodyProcessor"
+		id="setBody" />
+	
+	<bean class="java.lang.Exception" id="myException" />
+	<camelContext id="myloggingdemo" useBreadcrumb="true" 
+		useMDCLogging="true" xmlns="http://camel.apache.org/schema/blueprint">
+		<onException>
+			<exception>java.lang.Exception</exception>
+			<to uri="direct:errorProcessing" />
+		</onException>
+		<route id="myfirstroute">
+			<from id="myfirstroutetimer" uri="timer:elavon?period=60000&amp;repeatCount=1" />
+			<setHeader headerName="specialId"><constant>mylogbestpracticeapp</constant></setHeader>
+			<setProperty propertyName="specialId">
+				<constant>mylogbestpracticeapp</constant>
+			</setProperty>
+			<to uri="log:logging.best.processor?showAll=true&amp;level=INFO" />
+			<setBody id="_setBody1">
+				<constant>NewYork</constant>
+			</setBody>
+			<to  uri="cxf:bean:getQuote" />
+			<log id="_log1" logName="logging.best.processor" message="cxf logger ${body}" />
+			<to  uri="bean:normalBean?method=callme" />
+			<!-- To differentiate log not being rolled to file -->
+			<process id="_process1" ref="camelBean" />
+			<log  logName="logging.best1.processor" message="End of the route" />
+			<to  uri="direct-vm:secondRoute" />
+			<to  uri="log:logging.best.processor?level=INFO" />
+			<log  logName="logging.best.processor" message="End of the route after sep category" />
+		</route>
+		<route id="mysecondRoute">
+			<from  uri="direct-vm:secondRoute" />
+			<log  logName="logging.best.processor" message="start of my second route" />
+			<process id="_process2" ref="setBody" />
+			<split >
+				<simple>${body}</simple>
+				<to uri="direct:aggregate" />
+			</split>
+			<log  logName="logging.best.processor" message="end of my second route" />
+		</route>
+		<route id="mythirdRoute">
+			<from  uri="direct:aggregate" />
+			<log logName="logging.best.processor" message="start of my third route" />
+			<aggregate eagerCheckCompletion="true" 
+				strategyRef="myStrategy">
+				<correlationExpression>
+					<constant>true</constant>
+				</correlationExpression>
+				<completionSize>
+					<constant>2</constant>
+				</completionSize>
+				<choice >
+					<when >
+						<simple>${body} == '5'</simple>
+						<throwException id="_throwException1" ref="myException" />
+						<log message="hello"/>
+					</when>
+				</choice>
+			</aggregate>
+			<log logName="logging.best.processor" message="start of my end route" />
+		</route>
+		<route id="errorProcessing">
+			<from  uri="direct:errorProcessing" />
+			<to 
+				uri="log:logging.best.processor?showAll=true&amp;multiline=true&amp;level=ERROR" />
+		</route>
+	</camelContext>
+</blueprint>
