@@ -1,0 +1,117 @@
+#log sample with format as below and with applicationId configured
+#as a bean in the blueprint file with value of mycustommdcapp
+#Layout format configured in pax logging PID as below
+#log4j.appender.integrationProcess.appender.layout.ConversionPattern=%d{ABSOLUTE} | %-5.5p | %X{camel.contextId} | %X{camel.routeId} | #%X{camel.exchangeId} | %X{applicationId} | %m%n
+
+01:22:21,736 | INFO  | myloggingdemo | myfirstroute | ID-smunirat-local-55939-1487903694010-26-2 | mycustommdcapp | Exchange[Id: ID-smunirat-local-55939-1487903694010-26-2, ExchangePattern: InOnly, Properties: {CamelCreatedTimestamp=Fri Feb 24 01:22:21 EST 2017, CamelMessageHistory=[DefaultMessageHistory[routeId=myfirstroute, node=setHeader9], DefaultMessageHistory[routeId=myfirstroute, node=setProperty20], DefaultMessageHistory[routeId=myfirstroute, node=to55]], CamelTimerCounter=1, CamelTimerFiredTime=Fri Feb 24 01:22:21 EST 2017, CamelTimerName=elavon, CamelTimerPeriod=60000, CamelToEndpoint=log://logging.best.processor?level=INFO&showAll=true, specialId=mylogbestpracticeapp}, Headers: {breadcrumbId=ID-smunirat-local-55939-1487903694010-26-1, firedTime=Fri Feb 24 01:22:21 EST 2017, specialId=mylogbestpracticeapp}, BodyType: null, Body: [Body is null], Out: null: ]
+01:22:21,745 | INFO  | myloggingdemo | myfirstroute | ID-smunirat-local-55939-1487903694010-26-2 | mycustommdcapp | Outbound Message
+---------------------------
+ID: 24
+Address: http://www.webservicex.net/stockquote.asmx?WSDL
+Encoding: UTF-8
+Http-Method: POST
+Content-Type: text/xml
+Headers: {Accept=[*/*], breadcrumbId=[ID-smunirat-local-55939-1487903694010-26-1], firedTime=[Fri Feb 24 01:22:21 EST 2017], SOAPAction=["http://www.webserviceX.NET/GetQuote"], specialId=[mylogbestpracticeapp]}
+Payload: <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><GetQuote xmlns="http://www.webserviceX.NET/"><symbol>NewYork</symbol></GetQuote></soap:Body></soap:Envelope>
+--------------------------------------
+01:22:21,746 | INFO  | myloggingdemo | myfirstroute | ID-smunirat-local-55939-1487903694010-26-2 | mycustommdcapp | registering MBean org.apache.cxf:bus.id=logging-best-cxf1067795526,WorkQueueManager=Bus.WorkQueueManager,type=WorkQueues,name=default,instance.id=982572871: org.apache.cxf.bus.managers.WorkQueueImplMBeanWrapper@1ef32289
+01:22:21,746 | INFO  | myloggingdemo | myfirstroute | ID-smunirat-local-55939-1487903694010-26-2 | mycustommdcapp | registering MBean org.apache.cxf:bus.id=logging-best-cxf1067795526,WorkQueueManager=Bus.WorkQueueManager,type=WorkQueues,name=default,instance.id=982572871: javax.management.modelmbean.RequiredModelMBean@be0021e
+01:22:22,070 | INFO  | myloggingdemo | myfirstroute | ID-smunirat-local-55939-1487903694010-26-2 | mycustommdcapp | Inbound Message
+----------------------------
+ID: 24
+Response-Code: 200
+Encoding: UTF-8
+Content-Type: text/xml; charset=utf-8
+Headers: {Cache-Control=[private, max-age=0], Content-Length=[934], content-type=[text/xml; charset=utf-8], Date=[Fri, 24 Feb 2017 06:22:01 GMT], Server=[Microsoft-IIS/7.0], X-AspNet-Version=[4.0.30319], X-Powered-By=[ASP.NET]}
+Payload: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><GetQuoteResponse xmlns="http://www.webserviceX.NET/"><GetQuoteResult>&lt;StockQuotes&gt;&lt;Stock&gt;&lt;Symbol&gt;NewYork&lt;/Symbol&gt;&lt;Last&gt;N/A&lt;/Last&gt;&lt;Date&gt;N/A&lt;/Date&gt;&lt;Time&gt;N/A&lt;/Time&gt;&lt;Change&gt;N/A&lt;/Change&gt;&lt;Open&gt;N/A&lt;/Open&gt;&lt;High&gt;N/A&lt;/High&gt;&lt;Low&gt;N/A&lt;/Low&gt;&lt;Volume&gt;N/A&lt;/Volume&gt;&lt;MktCap&gt;N/A&lt;/MktCap&gt;&lt;PreviousClose&gt;N/A&lt;/PreviousClose&gt;&lt;PercentageChange&gt;N/A&lt;/PercentageChange&gt;&lt;AnnRange&gt;N/A&lt;/AnnRange&gt;&lt;Earns&gt;N/A&lt;/Earns&gt;&lt;P-E&gt;N/A&lt;/P-E&gt;&lt;Name&gt;N/A&lt;/Name&gt;&lt;/Stock&gt;&lt;/StockQuotes&gt;</GetQuoteResult></GetQuoteResponse></soap:Body></soap:Envelope>
+--------------------------------------
+01:22:22,074 | INFO  | myloggingdemo | myfirstroute | ID-smunirat-local-55939-1487903694010-26-2 | mycustommdcapp | cxf logger <StockQuotes><Stock><Symbol>NewYork</Symbol><Last>N/A</Last><Date>N/A</Date><Time>N/A</Time><Change>N/A</Change><Open>N/A</Open><High>N/A</High><Low>N/A</Low><Volume>N/A</Volume><MktCap>N/A</MktCap><PreviousClose>N/A</PreviousClose><PercentageChange>N/A</PercentageChange><AnnRange>N/A</AnnRange><Earns>N/A</Earns><P-E>N/A</P-E><Name>N/A</Name></Stock></StockQuotes>
+01:22:22,076 | INFO  | myloggingdemo | myfirstroute | ID-smunirat-local-55939-1487903694010-26-2 | mycustommdcapp | Logging Body from Normal Bean  [<StockQuotes><Stock><Symbol>NewYork</Symbol><Last>N/A</Last><Date>N/A</Date><Time>N/A</Time><Change>N/A</Change><Open>N/A</Open><High>N/A</High><Low>N/A</Low><Volume>N/A</Volume><MktCap>N/A</MktCap><PreviousClose>N/A</PreviousClose><PercentageChange>N/A</PercentageChange><AnnRange>N/A</AnnRange><Earns>N/A</Earns><P-E>N/A</P-E><Name>N/A</Name></Stock></StockQuotes>]
+01:22:22,076 | INFO  | myloggingdemo | myfirstroute | ID-smunirat-local-55939-1487903694010-26-2 | mycustommdcapp | Logging Body from CamelProcessor Bean  [<StockQuotes><Stock><Symbol>NewYork</Symbol><Last>N/A</Last><Date>N/A</Date><Time>N/A</Time><Change>N/A</Change><Open>N/A</Open><High>N/A</High><Low>N/A</Low><Volume>N/A</Volume><MktCap>N/A</MktCap><PreviousClose>N/A</PreviousClose><PercentageChange>N/A</PercentageChange><AnnRange>N/A</AnnRange><Earns>N/A</Earns><P-E>N/A</P-E><Name>N/A</Name></Stock></StockQuotes>]
+01:22:22,076 | INFO  | myloggingdemo | mysecondRoute | ID-smunirat-local-55939-1487903694010-26-4 | mycustommdcapp | start of my second route
+01:22:22,076 | INFO  | myloggingdemo | mysecondRoute | ID-smunirat-local-55939-1487903694010-26-4 | mycustommdcapp | Set the body of Exchange to [Ljava.lang.String;@60ba3551
+01:22:22,077 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-7 | mycustommdcapp | start of my third route
+01:22:22,077 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-7 | mycustommdcapp | start of my end route
+01:22:22,077 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-9 | mycustommdcapp | start of my third route
+01:22:22,077 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-9 | mycustommdcapp | This is sample log from aggregationStartegy
+01:22:22,078 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-9 | mycustommdcapp | start of my end route
+01:22:22,078 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-13 | mycustommdcapp | start of my third route
+01:22:22,078 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-13 | mycustommdcapp | start of my end route
+01:22:22,078 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-15 | mycustommdcapp | start of my third route
+01:22:22,078 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-15 | mycustommdcapp | This is sample log from aggregationStartegy
+01:22:22,078 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-15 | mycustommdcapp | start of my end route
+01:22:22,078 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-19 | mycustommdcapp | start of my third route
+01:22:22,078 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-19 | mycustommdcapp | start of my end route
+01:22:22,078 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-21 | mycustommdcapp | start of my third route
+01:22:22,079 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-21 | mycustommdcapp | This is sample log from aggregationStartegy
+01:22:22,080 | ERROR | myloggingdemo | errorProcessing | ID-smunirat-local-55939-1487903694010-26-22 | mycustommdcapp | Exchange[
+, Id: ID-smunirat-local-55939-1487903694010-26-22
+, ExchangePattern: InOnly
+, Properties: {CamelAggregatedCompletedBy=size, CamelAggregatedCorrelationKey=true, CamelAggregatedSize=2, CamelAggregationStrategy={Splitter[on: Simple: ${body} to: Channel[sendTo(Endpoint[direct://aggregate])] aggregate: null]=UseOriginalAggregationStrategy}, CamelCorrelationId=ID-smunirat-local-55939-1487903694010-26-19, CamelCreatedTimestamp=Fri Feb 24 01:22:21 EST 2017, CamelCXFDataFormat=POJO, CamelExceptionCaught=java.lang.Exception, CamelFailureEndpoint=direct://aggregate, CamelFailureRouteId=mythirdRoute, CamelFilterMatched=true, CamelMessageHistory=[DefaultMessageHistory[routeId=mysecondRoute, node=to60], DefaultMessageHistory[routeId=mythirdRoute, node=log50], DefaultMessageHistory[routeId=mythirdRoute, node=aggregate5], DefaultMessageHistory[routeId=mythirdRoute, node=choice5], DefaultMessageHistory[routeId=mythirdRoute, node=_throwException1], DefaultMessageHistory[routeId=null, node=to54], DefaultMessageHistory[routeId=errorProcessing, node=to61]], CamelSplitComplete=false, CamelSplitIndex=4, CamelSplitSize=6, CamelStreamCacheUnitOfWork=MDCUnitOfWork, CamelTimerCounter=1, CamelTimerFiredTime=Fri Feb 24 01:22:21 EST 2017, CamelTimerName=elavon, CamelTimerPeriod=60000, CamelToEndpoint=log://logging.best.processor?level=ERROR&multiline=true&showAll=true, mtom-enabled=false, org.apache.cxf.service.model.BindingOperationInfo=[BindingOperationInfo: {http://www.webserviceX.NET/}GetQuote], RequestContext=org.apache.cxf.jaxws.context.WrappedMessageContext@49f41ae0, specialId=mylogbestpracticeapp}
+, Headers: {breadcrumbId=ID-smunirat-local-55939-1487903694010-26-18, CamelRedelivered=false, CamelRedeliveryCounter=0}
+, BodyType: String
+, Body: 5
+, CaughtExceptionType: java.lang.Exception, CaughtExceptionMessage: null, StackTrace: java.lang.Exception
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.aries.blueprint.utils.ReflectionUtils.newInstance(ReflectionUtils.java:331)
+	at org.apache.aries.blueprint.container.BeanRecipe.newInstance(BeanRecipe.java:984)
+	at org.apache.aries.blueprint.container.BeanRecipe.getInstanceFromType(BeanRecipe.java:349)
+	at org.apache.aries.blueprint.container.BeanRecipe.getInstance(BeanRecipe.java:282)
+	at org.apache.aries.blueprint.container.BeanRecipe.internalCreate2(BeanRecipe.java:830)
+	at org.apache.aries.blueprint.container.BeanRecipe.internalCreate(BeanRecipe.java:811)
+	at org.apache.aries.blueprint.di.AbstractRecipe$1.call(AbstractRecipe.java:79)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.aries.blueprint.di.AbstractRecipe.create(AbstractRecipe.java:88)
+	at org.apache.aries.blueprint.container.BlueprintRepository.createInstances(BlueprintRepository.java:247)
+	at org.apache.aries.blueprint.container.BlueprintRepository.createAll(BlueprintRepository.java:183)
+	at org.apache.aries.blueprint.container.BlueprintContainerImpl.instantiateEagerComponents(BlueprintContainerImpl.java:688)
+	at org.apache.aries.blueprint.container.BlueprintContainerImpl.doRun(BlueprintContainerImpl.java:383)
+	at org.apache.aries.blueprint.container.BlueprintContainerImpl.run(BlueprintContainerImpl.java:270)
+	at org.apache.aries.blueprint.container.BlueprintExtender.createContainer(BlueprintExtender.java:294)
+	at org.apache.aries.blueprint.container.BlueprintExtender.createContainer(BlueprintExtender.java:263)
+	at org.apache.aries.blueprint.container.BlueprintExtender.modifiedBundle(BlueprintExtender.java:253)
+	at org.apache.aries.util.tracker.hook.BundleHookBundleTracker$Tracked.customizerModified(BundleHookBundleTracker.java:500)
+	at org.apache.aries.util.tracker.hook.BundleHookBundleTracker$Tracked.customizerModified(BundleHookBundleTracker.java:433)
+	at org.apache.aries.util.tracker.hook.BundleHookBundleTracker$AbstractTracked.track(BundleHookBundleTracker.java:725)
+	at org.apache.aries.util.tracker.hook.BundleHookBundleTracker$Tracked.bundleChanged(BundleHookBundleTracker.java:463)
+	at org.apache.aries.util.tracker.hook.BundleHookBundleTracker$BundleEventHook.event(BundleHookBundleTracker.java:422)
+	at org.apache.felix.framework.util.SecureAction.invokeBundleEventHook(SecureAction.java:1127)
+	at org.apache.felix.framework.util.EventDispatcher.createWhitelistFromHooks(EventDispatcher.java:696)
+	at org.apache.felix.framework.util.EventDispatcher.fireBundleEvent(EventDispatcher.java:484)
+	at org.apache.felix.framework.Felix.fireBundleEvent(Felix.java:4429)
+	at org.apache.felix.framework.Felix.startBundle(Felix.java:2100)
+	at org.apache.felix.framework.BundleImpl.start(BundleImpl.java:976)
+	at org.apache.felix.framework.BundleImpl.start(BundleImpl.java:963)
+	at org.apache.karaf.shell.osgi.InstallBundle.doExecute(InstallBundle.java:51)
+	at org.apache.karaf.shell.console.OsgiCommandSupport.execute(OsgiCommandSupport.java:38)
+	at org.apache.felix.gogo.commands.basic.AbstractCommand.execute(AbstractCommand.java:35)
+	at sun.reflect.GeneratedMethodAccessor67.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.aries.proxy.impl.ProxyHandler$1.invoke(ProxyHandler.java:54)
+	at org.apache.aries.proxy.impl.ProxyHandler.invoke(ProxyHandler.java:119)
+	at org.apache.karaf.shell.console.commands.$BlueprintCommand31144530.execute(Unknown Source)
+	at org.apache.felix.gogo.runtime.CommandProxy.execute(CommandProxy.java:78)
+	at org.apache.felix.gogo.runtime.Closure.executeCmd(Closure.java:477)
+	at org.apache.felix.gogo.runtime.Closure.executeStatement(Closure.java:403)
+	at org.apache.felix.gogo.runtime.Pipe.run(Pipe.java:108)
+	at org.apache.felix.gogo.runtime.Closure.execute(Closure.java:183)
+	at org.apache.felix.gogo.runtime.Closure.execute(Closure.java:120)
+	at org.apache.felix.gogo.runtime.CommandSessionImpl.execute(CommandSessionImpl.java:92)
+	at org.apache.karaf.shell.console.jline.Console.run(Console.java:197)
+	at org.apache.karaf.shell.ssh.ShellFactoryImpl$ShellImpl$1.runConsole(ShellFactoryImpl.java:173)
+	at org.apache.karaf.shell.ssh.ShellFactoryImpl$ShellImpl$1$1.run(ShellFactoryImpl.java:125)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.karaf.jaas.modules.JaasHelper.doAs(JaasHelper.java:47)
+	at org.apache.karaf.shell.ssh.ShellFactoryImpl$ShellImpl$1.run(ShellFactoryImpl.java:123)
+
+, Out: null: 
+]
+01:22:22,091 | INFO  | myloggingdemo | mythirdRoute | ID-smunirat-local-55939-1487903694010-26-21 | mycustommdcapp | start of my end route
+01:22:22,091 | INFO  | myloggingdemo | mysecondRoute | ID-smunirat-local-55939-1487903694010-26-4 | mycustommdcapp | end of my second route
+01:22:22,091 | INFO  | myloggingdemo | myfirstroute | ID-smunirat-local-55939-1487903694010-26-2 | mycustommdcapp | Exchange[ExchangePattern: InOnly, BodyType: String[], Body: [Ljava.lang.String;@60ba3551]
+01:22:22,091 | INFO  | myloggingdemo | myfirstroute | ID-smunirat-local-55939-1487903694010-26-2 | mycustommdcapp | End of the route after sep category
+
